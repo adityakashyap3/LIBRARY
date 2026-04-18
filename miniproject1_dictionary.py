@@ -18,14 +18,32 @@ def issued_books():
     show_books()
     name=input("enter the name of the book: ")
     if name in books:
-        issue_books[name] = books.pop(name)
+        student_name=input("enter the name of students :")
+        days=int(input("for how many days :"))
+        issue_books[name]=days
+        books.pop(name)
+        date=input("enter the date of issuing books :")
         print("book issued")
     else:
         print("book not issued")
 def return_books():
     name=input("enter the name of the book: ")
     if name in issue_books:
+        actual_days=int(input("enter the number of days for which you used the books :"))
+        alloted_days=issue_books[name]
         books[name] = issue_books.pop(name)
+        fine=0
+        if actual_days > alloted_days:
+            extra_days = actual_days - alloted_days
+            print("extra days:", extra_days)
+            if extra_days <= 7:
+                fine=extra_days*10
+            elif 7 < extra_days <= 14:
+                fine=extra_days*10*2
+            else:
+                fine=extra_days*10*2*3
+        print("fine=",fine)
+            
         print("books returned")
     else:
         print("no books to return")
